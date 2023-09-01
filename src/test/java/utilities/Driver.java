@@ -1,5 +1,7 @@
 package utilities;
 
+import java.time.Duration;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -24,7 +26,7 @@ public class Driver {
 	public static WebDriver getDriver() {
 		String browser = System.getProperty("browser");
 		if (browser == null) {
-			browser = PropertiesReader.getProperty("browser");
+			browser = DataReader.getProperty("browser");
 		}
 		if (driver == null || ((RemoteWebDriver) driver).getSessionId() == null) {
 			switch (browser) {
@@ -45,6 +47,8 @@ public class Driver {
 				driver = new ChromeDriver();
 			}
 		}
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 		return driver;
 	}
 

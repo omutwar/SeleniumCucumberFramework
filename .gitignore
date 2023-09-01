@@ -3,3 +3,4 @@
 ##### Maven files
 Reports/*
 
+/target/

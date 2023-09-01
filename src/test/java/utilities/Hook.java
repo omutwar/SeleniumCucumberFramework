@@ -1,21 +1,22 @@
-package step_definitions;
+package utilities;
 
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import utilities.Driver;
 
 public class Hook {
+	private static WebDriver driver = Driver.getDriver();
 
 	@Before
 	public void setUp() {
-		Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		// Driver.getDriver().manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.manage().window().maximize();
 	}
 
 	@After
@@ -24,7 +25,7 @@ public class Hook {
 			final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
 			scenario.attach(screenshot, "image/png", "screenshot");
 		}
-		Driver.quitDriver();
+		driver.quit();
 	}
 
 }

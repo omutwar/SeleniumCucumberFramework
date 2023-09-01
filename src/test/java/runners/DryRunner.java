@@ -9,6 +9,7 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions(features = "src/test/resources/features/Login.feature", 
 				glue = "step_definitions", 
 				dryRun = true, 
+				tags = "@amazonPage", 
 				monochrome = true)
 public class DryRunner {
 }
